@@ -31,29 +31,31 @@ protected:
 	//FIX THESEvvvvvvvvvvvvvv
 public: void calculateHP(double level)// HP
 {
-	hp = (level * hpPerLvl) + hpBase;
+	hp = ((level-1) * hpPerLvl) + hpBase;
 }//END calculateHP
 
-public: double calculateAD(double level)// AD
+public: void calculateAD(double level)// AD
 {
-	double temp;
-	temp = (level * adPerLvl) + adBase;
-	return temp;
+	ad = ((level-1) * adPerLvl) + adBase;
 }//END calcualteAD
 
-public: double calculateArmor(double level)//Armor
+public: void calculateArmor(double level)//Armor
 {
-	double temp;
-	temp = (level * armorPerLvl) + armorBase;
-	return temp;
+	armor = ((level-1) * armorPerLvl) + armorBase;
 }//END calcualteArmor
 
-public: double calculateAS(double level)//AS
+public: void calculateAS(double level)//AS
 {
-	double temp;
-	temp = (level * asPerLvl + 1) * asBase;
-	return temp;
+	as = ((level-1) * asPerLvl + 1) * asBase;
 }//END calcualteAS
+
+public: void calculate(double level)
+{
+	hp = ((level - 1) * hpPerLvl) + hpBase;
+	ad = ((level - 1) * adPerLvl) + adBase;
+	armor = ((level - 1) * armorPerLvl) + armorBase;
+	as = ((level - 1) * asPerLvl + 1) * asBase;
+}//END caculate
 
 public: void display(char firstOrSecond[10])
 {
@@ -108,7 +110,7 @@ public: Corki()
 {
 	hpBase = 512.76;
 	hpPerLvl = 82;
-	adBase = 53;
+	adBase = 56;
 	adPerLvl = 3.5;
 	asBase = 0.625;
 	asPerLvl = 0.023;
@@ -450,7 +452,7 @@ Champion* search(char firstOrSecond[10])
 			cout << "Invalid Entry. Please try again" << endl;
 			--pass;
 		}
-	} while (pass != 1);//END do while, this is selecting the first champ
+	} while (pass != 1);//END do while
 
 	return champ;
 }//END search
@@ -467,13 +469,15 @@ int main()
 	Champion **champs;
 	champs = new Champion * [2];
 	champs[0] = search("first");
-	champs[1] = search("second");
+	//champs[1] = search("second");
 
 	champs[0]->display("first");//TESTING DISPLAY
-	champs[1]->display("second");//TESTING DISPLAY
-	//champs[0]->calculateHP(2);
-	//cout << "your champs level 2 hp = " << champs[0]->hp <<endl;
-
+	//champs[1]->display("second");//TESTING DISPLAY
+	champs[0]->calculate(18);												//this takes the place of all the calculate functions. all 4 are included
+	cout << "your first champs level 18 HP = " << champs[0]->hp <<endl;
+	cout << "your first champs level 18 AD = " << champs[0]->ad << endl;
+	cout << "your first champs level 18 AS = " << champs[0]->as << endl;
+	cout << "your first champs level 18 ARMOR = " << champs[0]->armor << endl;
 	
 	return 0;
 }
