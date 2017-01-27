@@ -55,9 +55,9 @@ public: double calculateAS(double level)//AS
 	return temp;
 }//END calcualteAS
 
-public: void display()
+public: void display(char firstOrSecond[10])
 {
-	cout << "YOUR CHAMP STATS:" << endl;
+	cout << "YOUR " << firstOrSecond << " CHAMP STATS:" << endl;
 	printf(" hp: %3.2f\n hp/level: %3.2f\n ad: %3.2f\n ad/level: %3.2f\n as: %3.3f\n as/level: %3.4f\n armor: %3.2f\n armor/level: %3.2f\n",
 		hpBase, hpPerLvl, adBase, adPerLvl, asBase, asPerLvl, armorBase, armorPerLvl);
 }
@@ -358,103 +358,92 @@ public: Vayne()
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------- V-MAIN-V
-
-
-int main()
+Champion* search(char firstOrSecond[10])
 {
-	Champion **champs;
+	Champion *champ;
 	char answer[20];
-	int answer2 = 0;//needed in the menu
-
-	cout << "This program will allow you to compare ADCs base damage 1v1 against another ADC" << endl;
-	cout << "You'll be prompted to choose the ADC and level, then the next ADC and level to compare" << endl;
-	cout << "(this is without runes/masteries/items/abilities)" << endl;
-
-
-	champs = new Champion *[2];
-	int pass = 1;//ends the do-while
+	int pass;//ends the do-while
 	do
 	{
 		pass = 1;
-		cout << "Enter the name of the first ADC to 1v1" << endl;
+		cout << "Enter the name of the " << firstOrSecond << " ADC to 1v1" << endl;
 		gets_s(answer);
 
 		if (strcmp(answer, "Ashe") == 0)
 		{
-			champs[0] = new Ashe();
+			champ = new Ashe();
 		}
 		else if (strcmp(answer, "Caitlyn") == 0)
 		{
-			champs[0] = new Caitlyn();
+			champ = new Caitlyn();
 		}
 		else if (strcmp(answer, "Corki") == 0)
 		{
-			champs[0] = new Corki();
+			champ = new Corki();
 		}
 		else if (strcmp(answer, "Draven") == 0)
 		{
-			champs[0] = new Draven();
+			champ = new Draven();
 		}
 		else if (strcmp(answer, "Ezreal") == 0)
 		{
-			champs[0] = new Ezreal();
+			champ = new Ezreal();
 		}
 		else if (strcmp(answer, "Graves") == 0)
 		{
-			champs[0] = new Graves();
+			champ = new Graves();
 		}
 		else if (strcmp(answer, "Jhin") == 0)
 		{
-			champs[0] = new Jhin();
+			champ = new Jhin();
 		}
 		else if (strcmp(answer, "Jinx") == 0)
 		{
-			champs[0] = new Jinx();
+			champ = new Jinx();
 		}
 		else if (strcmp(answer, "Kalista") == 0)
 		{
-			champs[0] = new Kalista();
+			champ = new Kalista();
 		}
 		else if (strcmp(answer, "KogMaw") == 0)
 		{
-			champs[0] = new KogMaw();
+			champ = new KogMaw();
 		}
 		else if (strcmp(answer, "Lucian") == 0)
 		{
-			champs[0] = new Lucian();
+			champ = new Lucian();
 		}
 		else if (strcmp(answer, "Miss Fortune") == 0)
 		{
-			champs[0] = new MissFortune();
+			champ = new MissFortune();
 		}
 		else if (strcmp(answer, "Quinn") == 0)
 		{
-			champs[0] = new Quinn();
+			champ = new Quinn();
 		}
 		else if (strcmp(answer, "Sivir") == 0)
 		{
-			champs[0] = new Sivir();
+			champ = new Sivir();
 		}
 		else if (strcmp(answer, "Tristana") == 0)
 		{
-			champs[0] = new Tristana();
+			champ = new Tristana();
 		}
 		else if (strcmp(answer, "Twitch") == 0)
 		{
-			champs[0] = new Twitch();
+			champ = new Twitch();
 		}
 		else if (strcmp(answer, "Urgot") == 0)
 		{
-			champs[0] = new Urgot();
+			champ = new Urgot();
 		}
 		else if (strcmp(answer, "Varus") == 0)
 		{
-			champs[0] = new Varus();
+			champ = new Varus();
 		}
 		else if (strcmp(answer, "Vayne") == 0)
 		{
-			champs[0] = new Vayne();
+			champ = new Vayne();
 		}
 		else
 		{
@@ -463,7 +452,25 @@ int main()
 		}
 	} while (pass != 1);//END do while, this is selecting the first champ
 
-	champs[0]->display();//TESTING DISPLAY
+	return champ;
+}//END search
+
+//----------------------------------------------------------------------------------------------------------------------------------------------- V-MAIN-V
+
+
+int main()
+{
+	cout << "This program will allow you to compare ADCs base damage 1v1 against another ADC" << endl;
+	cout << "You'll be prompted to choose the ADC and level, then the next ADC and level to compare" << endl;
+	cout << "(this is without runes/masteries/items/abilities)" << endl;
+
+	Champion **champs;
+	champs = new Champion * [2];
+	champs[0] = search("first");
+	champs[1] = search("second");
+
+	champs[0]->display("first");//TESTING DISPLAY
+	champs[1]->display("second");//TESTING DISPLAY
 	//champs[0]->calculateHP(2);
 	//cout << "your champs level 2 hp = " << champs[0]->hp <<endl;
 
