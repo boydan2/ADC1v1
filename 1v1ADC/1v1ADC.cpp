@@ -494,6 +494,10 @@ int main()
 	Champion **champs;
 	champs = new Champion * [2];
 	int level;
+	int hitsToKill1;
+	int hitsToKill2;
+	double timeToKill1;
+	double timeToKill2;
 	
 	//SELECTION
 
@@ -534,6 +538,30 @@ int main()
 	cout << "at level " << level << " your second champ auto attacks every " << champs[1]->secondsPerAD << " seconds." << endl;
 
 
+	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvTHIS SHIT NEEDS MORE TESTING BUT SEEMS FINEvvvvvvvv
+	//the 1v1
+	//calculate time/hits to die (1 is to KILL the first champ)
+	hitsToKill1 = champs[0]->hpEffective / champs[1]->ad;
+	hitsToKill2 = champs[1]->hpEffective / champs[0]->ad;
+	timeToKill1 = hitsToKill1 * champs[1]->secondsPerAD;
+	timeToKill2 = hitsToKill2 * champs[0]->secondsPerAD;
+	//who wins? display                                                           ADD HP-LEFT AND SHIT TO THIS
+	if (timeToKill1 < timeToKill2)
+	{
+		cout << "\n congratulations! champ 2 wins!" << endl;
+		cout << " champ 1 dies in " << timeToKill1 << " seconds and " << hitsToKill1 << " hits!" << endl;
+		cout << " champ 2 survives!\n" << endl;
+	}
+	else if (timeToKill2 < timeToKill1)
+	{
+		cout << "\n congratulations! champ 1 wins!" << endl;
+		cout << " champ 2 dies in " << timeToKill2 << " seconds and " << hitsToKill2 << " hits!" << endl;
+		cout << " champ 1 survives!\n" << endl;
+	}
+	else
+	{
+		cout << "\n wtf its an exact tie...........\n" << endl;
+	}
 	
 
 	
