@@ -469,6 +469,19 @@ Champion* search(char firstOrSecond[10])
 	return champ;
 }//END search
 
+
+int verifyLevel(int lvl)
+{
+	while (lvl > 18 || lvl < 1)
+	{
+		cout << "invalid level, please re-enter your level (1-18)" << endl;
+		cin >> lvl;
+		cin.clear();
+		cin.ignore();
+	}//end while
+	return lvl;
+}
+
 //----------------------------------------------------------------------------------------------------------------------------------------------- V-MAIN-V
 
 
@@ -481,22 +494,49 @@ int main()
 	Champion **champs;
 	champs = new Champion * [2];
 	int level;
-	champs[0] = search("first");
-	//champs[1] = search("second");
+	
+	//SELECTION
 
+	//CHAMP 1
+	champs[0] = search("first");
 	cout << "What level do you want this champion to be?" << endl;
 	cin >>level;
 	cin.clear();
 	cin.ignore();
-
+	//verify level/calculate
+	level = verifyLevel(level);
+	champs[0]->calculate(level);					//this takes the place of all the calculate functions. all 4 are included
+	//display (for my peace of mind/troubleshooting)
 	champs[0]->display("first");//TESTING DISPLAY
-	//champs[1]->display("second");//TESTING DISPLAY
-	champs[0]->calculate(level);												//this takes the place of all the calculate functions. all 4 are included
-	cout << "your first champs level " << level << " HP = " << champs[0]->hp <<endl;
+	cout << "your first champs level " << level << " HP = " << champs[0]->hp << endl;
 	cout << "your first champs level " << level << " AD = " << champs[0]->ad << endl;
 	cout << "your first champs level " << level << " AS = " << champs[0]->as << endl;
 	cout << "your first champs level " << level << " ARMOR = " << champs[0]->armor << endl;
 	cout << "your first champs level " << level << " Effective HP = " << champs[0]->hpEffective << endl;
-	cout << "at level " << level << " your first champ auto attacks every = " << champs[0]->secondsPerAD << " seconds." << endl;
+	cout << "at level " << level << " your first champ auto attacks every " << champs[0]->secondsPerAD << " seconds." << endl;
+
+	//CHAMP 2
+	champs[1] = search("second");
+	cout << "What level do you want this champion to be?" << endl;
+	cin >> level;
+	cin.clear();
+	cin.ignore();
+	//verify level/calulate
+	level = verifyLevel(level);
+	champs[1]->calculate(level);					//this takes the place of all the calculate functions. all 4 are included
+	//display (for my peace of mind/troubleshooting)
+	champs[1]->display("second");//TESTING DISPLAY
+	cout << "your second champs level " << level << " HP = " << champs[1]->hp << endl;
+	cout << "your second champs level " << level << " AD = " << champs[1]->ad << endl;
+	cout << "your second champs level " << level << " AS = " << champs[1]->as << endl;
+	cout << "your second champs level " << level << " ARMOR = " << champs[1]->armor << endl;
+	cout << "your second champs level " << level << " Effective HP = " << champs[1]->hpEffective << endl;
+	cout << "at level " << level << " your second champ auto attacks every " << champs[1]->secondsPerAD << " seconds." << endl;
+
+
+	
+
+	
+
 	return 0;
 }
