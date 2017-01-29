@@ -1,7 +1,7 @@
 // 1v1ADC.cpp : Defines the entry point for the console application.
 //Author Austin Boyd. 
 //The purpose of this program is to allow the user to enter 2 different champions 
-//and their level, to calculate just autoing each other to death,
+//and their levels, to calculate just autoing each other to death,
 //who would win. this is assuming 0 runes/masteries/items and assuming they start
 //autoing each other at the same time
 
@@ -18,6 +18,8 @@ public:
 	double ad;
 	double as;
 	double armor;
+	double hpEffective;
+	double secondsPerAD;//how many seconds/auto as opposed to autos/sec
 protected:
 	//constants for each champ
 	double hpBase;
@@ -51,19 +53,29 @@ public: void calculateAS(double level)//AS
 
 public: void calculate(double level)
 {
+	//current calcs
 	hp = ((level - 1) * hpPerLvl) + hpBase;
 	ad = ((level - 1) * adPerLvl) + adBase;
 	armor = ((level - 1) * armorPerLvl) + armorBase;
 	as = ((level - 1) * asPerLvl + 1) * asBase;
+	//theoretical calcs (used for calcs)
+	hpEffective = (((armor / 100) + 1)*hp);
+	secondsPerAD = 1 / as;
 }//END caculate
 
 public: void display(char firstOrSecond[10])
 {
-	cout << "YOUR " << firstOrSecond << " CHAMP STATS:" << endl;
+	cout << "your " << firstOrSecond << " champ base stats:" << endl;
 	printf(" hp: %3.2f\n hp/level: %3.2f\n ad: %3.2f\n ad/level: %3.2f\n as: %3.3f\n as/level: %3.4f\n armor: %3.2f\n armor/level: %3.2f\n",
 		hpBase, hpPerLvl, adBase, adPerLvl, asBase, asPerLvl, armorBase, armorPerLvl);
 }
 };//END champ parent class
+
+
+
+
+
+
 
 
 
@@ -371,85 +383,85 @@ Champion* search(char firstOrSecond[10])
 		cout << "Enter the name of the " << firstOrSecond << " ADC to 1v1" << endl;
 		gets_s(answer);
 
-		if (strcmp(answer, "Ashe") == 0)
+		if (strcmp(answer, "Ashe") == 0 || strcmp(answer, "ashe") == 0)
 		{
 			champ = new Ashe();
 		}
-		else if (strcmp(answer, "Caitlyn") == 0)
+		else if (strcmp(answer, "Caitlyn") == 0 || strcmp(answer, "caitlyn") == 0)
 		{
 			champ = new Caitlyn();
 		}
-		else if (strcmp(answer, "Corki") == 0)
+		else if (strcmp(answer, "Corki") == 0 || strcmp(answer, "corki") == 0)
 		{
 			champ = new Corki();
 		}
-		else if (strcmp(answer, "Draven") == 0)
+		else if (strcmp(answer, "Draven") == 0 || strcmp(answer, "draven") == 0)
 		{
 			champ = new Draven();
 		}
-		else if (strcmp(answer, "Ezreal") == 0)
+		else if (strcmp(answer, "Ezreal") == 0 || strcmp(answer, "ezreal") == 0)
 		{
 			champ = new Ezreal();
 		}
-		else if (strcmp(answer, "Graves") == 0)
+		else if (strcmp(answer, "Graves") == 0 || strcmp(answer, "graves") == 0)
 		{
 			champ = new Graves();
 		}
-		else if (strcmp(answer, "Jhin") == 0)
+		else if (strcmp(answer, "Jhin") == 0 || strcmp(answer, "jhin") == 0)
 		{
 			champ = new Jhin();
 		}
-		else if (strcmp(answer, "Jinx") == 0)
+		else if (strcmp(answer, "Jinx") == 0 || strcmp(answer, "jinx") == 0)
 		{
 			champ = new Jinx();
 		}
-		else if (strcmp(answer, "Kalista") == 0)
+		else if (strcmp(answer, "Kalista") == 0 || strcmp(answer, "kalista") == 0)
 		{
 			champ = new Kalista();
 		}
-		else if (strcmp(answer, "KogMaw") == 0)
+		else if (strcmp(answer, "KogMaw") == 0 || strcmp(answer, "kogmaw") == 0)
 		{
 			champ = new KogMaw();
 		}
-		else if (strcmp(answer, "Lucian") == 0)
+		else if (strcmp(answer, "Lucian") == 0 || strcmp(answer, "lucian") == 0)
 		{
 			champ = new Lucian();
 		}
-		else if (strcmp(answer, "Miss Fortune") == 0)
+		else if (strcmp(answer, "Miss Fortune") == 0 || strcmp(answer, "miss fortune") == 0)
 		{
 			champ = new MissFortune();
 		}
-		else if (strcmp(answer, "Quinn") == 0)
+		else if (strcmp(answer, "Quinn") == 0 || strcmp(answer, "quinn") == 0)
 		{
 			champ = new Quinn();
 		}
-		else if (strcmp(answer, "Sivir") == 0)
+		else if (strcmp(answer, "Sivir") == 0 || strcmp(answer, "sivir") == 0)
 		{
 			champ = new Sivir();
 		}
-		else if (strcmp(answer, "Tristana") == 0)
+		else if (strcmp(answer, "Tristana") == 0 || strcmp(answer, "tristana") == 0)
 		{
 			champ = new Tristana();
 		}
-		else if (strcmp(answer, "Twitch") == 0)
+		else if (strcmp(answer, "Twitch") == 0 || strcmp(answer, "twitch") == 0)
 		{
 			champ = new Twitch();
 		}
-		else if (strcmp(answer, "Urgot") == 0)
+		else if (strcmp(answer, "Urgot") == 0 || strcmp(answer, "urgot") == 0)
 		{
 			champ = new Urgot();
 		}
-		else if (strcmp(answer, "Varus") == 0)
+		else if (strcmp(answer, "Varus") == 0 || strcmp(answer, "varus") == 0)
 		{
 			champ = new Varus();
 		}
-		else if (strcmp(answer, "Vayne") == 0)
+		else if (strcmp(answer, "Vayne") == 0 || strcmp(answer, "vayne") == 0)
 		{
 			champ = new Vayne();
 		}
 		else
 		{
-			cout << "Invalid Entry. Please try again" << endl;
+			cout << "Invalid Entry. You boosted animal" << endl;
 			--pass;
 		}
 	} while (pass != 1);//END do while
@@ -468,16 +480,23 @@ int main()
 
 	Champion **champs;
 	champs = new Champion * [2];
+	int level;
 	champs[0] = search("first");
 	//champs[1] = search("second");
 
+	cout << "What level do you want this champion to be?" << endl;
+	cin >>level;
+	cin.clear();
+	cin.ignore();
+
 	champs[0]->display("first");//TESTING DISPLAY
 	//champs[1]->display("second");//TESTING DISPLAY
-	champs[0]->calculate(18);												//this takes the place of all the calculate functions. all 4 are included
-	cout << "your first champs level 18 HP = " << champs[0]->hp <<endl;
-	cout << "your first champs level 18 AD = " << champs[0]->ad << endl;
-	cout << "your first champs level 18 AS = " << champs[0]->as << endl;
-	cout << "your first champs level 18 ARMOR = " << champs[0]->armor << endl;
-	
+	champs[0]->calculate(level);												//this takes the place of all the calculate functions. all 4 are included
+	cout << "your first champs level " << level << " HP = " << champs[0]->hp <<endl;
+	cout << "your first champs level " << level << " AD = " << champs[0]->ad << endl;
+	cout << "your first champs level " << level << " AS = " << champs[0]->as << endl;
+	cout << "your first champs level " << level << " ARMOR = " << champs[0]->armor << endl;
+	cout << "your first champs level " << level << " Effective HP = " << champs[0]->hpEffective << endl;
+	cout << "at level " << level << " your first champ auto attacks every = " << champs[0]->secondsPerAD << " seconds." << endl;
 	return 0;
 }
