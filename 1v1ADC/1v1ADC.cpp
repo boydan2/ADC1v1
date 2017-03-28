@@ -57,7 +57,7 @@ public: void calculate(double level)
 	hp = ((level - 1) * hpPerLvl) + hpBase;
 	ad = ((level - 1) * adPerLvl) + adBase;
 	armor = ((level - 1) * armorPerLvl) + armorBase;
-	as = ((level - 1) * asPerLvl + 1) * asBase;
+	as = ((level - 1) * asPerLvl + 1) * asBase;		//REMEMBER AS/level is in a percentage (I've written it as 0.5 for 50%)
 	//theoretical calcs (used for calcs)
 	hpEffective = (((armor / 100) + 1)*hp);
 	secondsPerAD = 1 / as;
@@ -65,7 +65,7 @@ public: void calculate(double level)
 
 public: void display(char firstOrSecond[10])
 {
-	cout << "your " << firstOrSecond << " champ base stats:" << endl;
+	cout << "your " << firstOrSecond << " champs base stats:" << endl;
 	printf(" hp: %3.2f\n hp/level: %3.2f\n ad: %3.2f\n ad/level: %3.2f\n as: %3.3f\n as/level: %3.4f\n armor: %3.2f\n armor/level: %3.2f\n",
 		hpBase, hpPerLvl, adBase, adPerLvl, asBase, asPerLvl, armorBase, armorPerLvl);
 }
@@ -387,7 +387,7 @@ Champion* search(char firstOrSecond[10])
 		{
 			champ = new Ashe();
 		}
-		else if (strcmp(answer, "Caitlyn") == 0 || strcmp(answer, "caitlyn") == 0)
+		else if (strcmp(answer, "Caitlyn") == 0 || strcmp(answer, "caitlyn") || strcmp(answer, "Cait") || strcmp(answer, "cait") == 0)
 		{
 			champ = new Caitlyn();
 		}
@@ -399,7 +399,7 @@ Champion* search(char firstOrSecond[10])
 		{
 			champ = new Draven();
 		}
-		else if (strcmp(answer, "Ezreal") == 0 || strcmp(answer, "ezreal") == 0)
+		else if (strcmp(answer, "Ezreal") == 0 || strcmp(answer, "ezreal") || strcmp(answer, "Ez") || strcmp(answer, "ez") == 0)
 		{
 			champ = new Ezreal();
 		}
@@ -419,7 +419,7 @@ Champion* search(char firstOrSecond[10])
 		{
 			champ = new Kalista();
 		}
-		else if (strcmp(answer, "KogMaw") == 0 || strcmp(answer, "kogmaw") == 0)
+		else if (strcmp(answer, "KogMaw") == 0 || strcmp(answer, "kogmaw") || strcmp(answer, "Kog") || strcmp(answer, "kog") == 0)
 		{
 			champ = new KogMaw();
 		}
@@ -427,7 +427,7 @@ Champion* search(char firstOrSecond[10])
 		{
 			champ = new Lucian();
 		}
-		else if (strcmp(answer, "Miss Fortune") == 0 || strcmp(answer, "miss fortune") == 0)
+		else if (strcmp(answer, "Miss Fortune") == 0 || strcmp(answer, "miss fortune") || strcmp(answer, "MF") || strcmp(answer, "mf") == 0)
 		{
 			champ = new MissFortune();
 		}
@@ -439,7 +439,7 @@ Champion* search(char firstOrSecond[10])
 		{
 			champ = new Sivir();
 		}
-		else if (strcmp(answer, "Tristana") == 0 || strcmp(answer, "tristana") == 0)
+		else if (strcmp(answer, "Tristana") == 0 || strcmp(answer, "tristana") || strcmp(answer, "Trist") || strcmp(answer, "trist") == 0)
 		{
 			champ = new Tristana();
 		}
@@ -518,6 +518,7 @@ int main()
 	cout << "your first champs level " << level << " ARMOR = " << champs[0]->armor << endl;
 	cout << "your first champs level " << level << " Effective HP = " << champs[0]->hpEffective << endl;
 	cout << "at level " << level << " your first champ auto attacks every " << champs[0]->secondsPerAD << " seconds." << endl;
+
 
 	//CHAMP 2
 	champs[1] = search("second");
